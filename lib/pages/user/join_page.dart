@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/pages/user/login_page.dart';
+import 'package:get/get.dart';
 
 import '../../components/custom_elevated_button.dart';
 import '../../components/custom_text_form_field.dart';
@@ -33,7 +35,10 @@ class JoinPage extends StatelessWidget {
         CustomTextFormField(hint: "User Name"),
         CustomTextFormField(hint: "Password"),
         CustomTextFormField(hint: "Email"),
-        CustomElevatedButton(text: '회원가입'),
+        CustomElevatedButton(
+          text: '회원가입',
+          moveTo: () => Get.to(LoginPage()),
+        ),
       ],
     ));
   }

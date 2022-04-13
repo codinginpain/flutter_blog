@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
+        obscureText: hint == "Password" ? true : false,
         decoration: InputDecoration(
             hintText: "$hint",
             enabledBorder:
