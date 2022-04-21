@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/pages/user/login_page.dart';
 import 'package:get/get.dart';
+import 'package:validators/validators.dart';
 
 import '../../components/custom_elevated_button.dart';
 import '../../components/custom_text_form_field.dart';
+import '../../util/validator_util.dart';
 
 class JoinPage extends StatelessWidget {
+  final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +20,7 @@ class JoinPage extends StatelessWidget {
               alignment: Alignment.center,
               height: 200,
               child: Text(
-                "회원가입 페이지",
+                "회원가입",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
             ),
@@ -30,16 +33,30 @@ class JoinPage extends StatelessWidget {
 
   Widget _joinForm() {
     return Form(
+        key: _formkey,
         child: Column(
-      children: [
-        CustomTextFormField(hint: "User Name"),
-        CustomTextFormField(hint: "Password"),
-        CustomTextFormField(hint: "Email"),
-        CustomElevatedButton(
-          text: '회원가입',
-          moveTo: () => Get.to(LoginPage()),
-        ),
-      ],
-    ));
+          children: [
+            CustomTextFormField(
+              hint: "User Name",
+              fnValidator: validatorUserName(),
+            ),
+            CustomTextFormField(
+              hint: "Password",
+              fnValidator: validatorPassword(),
+            ),
+            CustomTextFormField(
+              hint: "Email",
+              fnValidator: validatorEmail(),
+            ),
+            CustomElevatedButton(
+              text: '회원가입',
+              fnMoveTo: () {
+                if (_formkey.currentState!.validate()) {
+                  Get.to(LoginPage());
+                }
+              },
+            ),
+          ],
+        ));
   }
 }
