@@ -29,3 +29,13 @@ Function validatorEmail() {
     }
   };
 }
+
+Function validatorEmpty(inputName) {
+  return (String? value) {
+    if (value!.isEmpty) {
+      print("빈값 입니다");
+      return "$inputName에 값을 입력 하셔야합니다";
+    }
+    return null;
+  };
+}
