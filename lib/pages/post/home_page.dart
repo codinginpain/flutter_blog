@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/pages/post/write_page.dart';
+import 'package:flutter_blog/pages/user/login_page.dart';
+import 'package:get/get.dart';
 
 import '../../size.dart';
+import '../user/user_info.dart';
+import 'detail_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -8,8 +13,21 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       drawer: _navigation(context),
       appBar: AppBar(),
-      body: Center(
-        child: Text("Home Page"),
+      body: ListView.separated(
+        itemCount: 20,
+        itemBuilder: (context, index) {
+          return ListTile(
+            onTap: () {
+              Get.to(DetailPage(index), arguments: "데이터");
+              //Get.to(DetailPage(index), arguments: "데이터"); arguments 로 넒길 수 있음
+            },
+            title: Text("제목"),
+            leading: Text("1"),
+          );
+        },
+        separatorBuilder: (context, index) {
+          return Divider();
+        },
       ),
     );
   }
@@ -26,7 +44,23 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(WritePage());
+                },
+                child: Text(
+                  "글 쓰기",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Divider(),
+              TextButton(
+                onPressed: () {
+                  Get.to(UserInfo());
+                },
                 child: Text(
                   "회원정보보기",
                   style: TextStyle(
@@ -38,7 +72,9 @@ class HomePage extends StatelessWidget {
               ),
               Divider(),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(LoginPage());
+                },
                 child: Text(
                   "로그아웃",
                   style: TextStyle(
