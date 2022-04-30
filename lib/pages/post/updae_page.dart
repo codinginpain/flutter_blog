@@ -42,7 +42,7 @@ class UpdatePage extends StatelessWidget {
                 text: '수정하기',
                 fnMoveTo: () {
                   if (_formkey.currentState!.validate()) {
-                    Get.off(DetailPage(1));
+                    Get.back(); //GetX의 Obs를 사용하여 상태 갱신
                   }
                 },
               ),
